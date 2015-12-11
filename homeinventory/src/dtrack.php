@@ -59,7 +59,7 @@ if ($dbconn) {
 	
 	// Parameter query
 	$query = "WITH counttable AS (
-				SELECT count(diaperid) - 2 as counts
+				SELECT count(diaperid) - 3 as counts
 				from diapertrack
 				group by date_trunc('day', diapertick)
 				order by date_trunc('day', diapertick)
@@ -73,7 +73,7 @@ if ($dbconn) {
 
 // ---------------------------------------------- //
 // Manually hardcoding for example only -- remove 
-$lam = 1.4;
+$lam = 0.5;
 $diapers_on_hand = 10;
 // ---------------------------------------------- //
 
@@ -107,7 +107,7 @@ for ($i = 1; $i <= 8; $i++) {
 	echo $format_string . "$day_string [$day_of_week]: $day_chance% $extra_space</span>|<br>";
 }
 echo "+--------------------------+";
-$expect = floor($diapers_on_hand / ($lam + 2));
+$expect = floor($diapers_on_hand / ($lam + 3));
 echo "<h3>Expected number of days left: $expect </h3>";
 ?>
 </body>
