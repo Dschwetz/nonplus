@@ -1,6 +1,6 @@
 # Single server priority queue
 # Discrete event simulation
-# (C) Feburary 2016, Digitialnonplus.com
+# (C) Feburary 2016, digitalnonplus.com
 # dave@digitalnonplus.com
 
 single_server_priority_q <- function(arrival1.rate, arrival1.sd=NA, arrival2.rate, arrival2.sd=NA, 
@@ -256,7 +256,9 @@ max.size <- max(prog[1:counter.prog,"n2"])
 counts <- seq(0,max.size)
 times <- rep(0, (max.size+1))
 
-q.size <- (prog[1:counter.prog,"n2"] - 1)
+q.size <- (prog[1:counter.prog,"n2"])   # Start with the number of class members in the system
+# Then, if there are any in service (at most 1), subtract 1 from the class members in the system, and thats the queue size.
+q.size[which(!is.infinite(prog[1:counter.prog,"t.s2"]))] <- (q.size[which(!is.infinite(prog[1:counter.prog,"t.s2"]))] - 1)
 q.size[which(q.size < 0)] <- 0
 q.max.size <- max(q.size)
 q.counts <- seq(0,q.max.size)
@@ -292,7 +294,9 @@ max.size <- max(prog[1:counter.prog,"n1"])
 counts <- seq(0,max.size)
 times <- rep(0, (max.size+1))
 
-q.size <- (prog[1:counter.prog,"n1"] - 1)
+# Same reasoning as above. 
+q.size <- (prog[1:counter.prog,"n1"])
+q.size[which(!is.infinite(prog[1:counter.prog,"t.s1"]))] <- (q.size[which(!is.infinite(prog[1:counter.prog,"t.s1"]))] - 1)
 q.size[which(q.size < 0)] <- 0
 q.max.size <- max(q.size)
 q.counts <- seq(0,q.max.size)
